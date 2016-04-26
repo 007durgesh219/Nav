@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'complete_data',
 			'username'  => 'root',
-			'password'  => 'ashoka',
+			'password'  => '007durgesh219',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
