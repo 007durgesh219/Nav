@@ -74,7 +74,7 @@ Route::get('change_pwd',  array('before' => 'auth',  function()
 Route::get('list_route',  array('before' => 'auth',   function()
 {
 	$city = Session::get('city');
- 	$trans = Session::get('trans'); 
+ 	$trans = Session::get('trans');
 	if($city==""||$trans==""){
     		 echo '<script>alert("Please select a city!");</script>';
     		 return View::make('header')->with('source','selection');
@@ -92,7 +92,7 @@ Route::get('test',  function()
 
 
 Route::get('admin_view',array('before' => 'auth',function()
-{	
+{
 	if(Auth::user()->role=="0"){
 		return View::make('volunteer_requests');
 	}
@@ -102,7 +102,7 @@ Route::get('admin_view',array('before' => 'auth',function()
 }));
 
 Route::get('volunteer_view',array('before' => 'auth', function()
-{	
+{
 	if(Auth::user()->role=="1"){
 		return View::make('accept_edits');
 	}
@@ -114,7 +114,7 @@ Route::get('volunteer_view',array('before' => 'auth', function()
 
 
 Route::get('volunteer_requests',array('before' => 'auth',function()
-{	
+{
 	if(Auth::user()->role=="0"){
 		return View::make('volunteer_requests');
 	}
@@ -158,7 +158,7 @@ Route::get('request_volunteer',  array('before' => 'auth',   function()
 	else{
 		return "you are already a volunteer. Please return to the portal by clicking <a href='get_search'>here</a>";
 	}
-	
+
 }));
 
 Route::get('accept_edits', array('before' => 'auth', function()
@@ -169,7 +169,7 @@ Route::get('accept_edits', array('before' => 'auth', function()
 	else{
 		return "you are not the admin/volunteer. Please return to the portal by clicking <a href='get_search'>here</a>";
 	}
-	
+
 }));
 
 Route::post('delete_route',  array('before' => 'auth','uses' =>'AuxController@delete_route'));
@@ -187,7 +187,7 @@ Route::get('delete_route', array('before' => 'auth', function()
 	else{
 		return "you are not the admin/volunteer. Please return to the portal by clicking <a href='get_search'>here</a>";
 	}
-	
+
 }));
 
 Route::post('edits_view', array('before' => 'auth', function()
@@ -252,4 +252,8 @@ Route::get('edit_stop',function(){
 	return "To be Updated";
 });
 
-
+Route::group(array('prefix' => 'app/'), function() {
+	Route::get('get_cities', 'AppController@getCities');
+	Route::get('get_routes/{city}', 'AppController@getRoutes');
+	Route::get('get_stops/{city}', 'AppController@getStops');
+});
